@@ -1,14 +1,18 @@
 {
   "name": "drt-engineer-agent",
-  "version": "1.0.0",
+  "version": "24.07.04.1905",
   "description": "DRT Race Engineer Tool",
-  "main": "index.js",
+  "main": "src/app.js",
+  "type": "module",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "update-version": "node update-version.js",
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "npm run update-version && node src/app.js"
   },
   "author": "Dahara",
   "license": "ISC",
   "dependencies": {
-    "node-irsdk-2023": "^2.1.8"
+    "node-irsdk-2023": "^2.1.8",
+    "ws": "^8.18.0"
   }
 }
