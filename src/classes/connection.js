@@ -69,32 +69,6 @@ export default class Connection {
 			if (message.key == "Code"){
 				console.log(`Your Code is: ${message.value}`);
 			}
-
-			/* if (message.key == "driverinfo") { //Config driverinfo empfangen
-				//global.driverinfo = message.value;
-			} else if (message.key == "settings") { //Config settings empfangen
-				if (this._compareVersions(status.version, message.value.overlayversion) < 0) {
-					menu.send({ key: "oldversion", value: message.value.overlayversion });
-					this.shouldReconnect = false;
-					this.ws.close();
-				}
-			} else if (message.key == "userinfo") { //Config userinfo empfangen
-				status.userinfo = message.value;
-			} else if (message.key == "DisplayUpdate") {
-				flag.send(message);
-			} else if (message.key == "DisplaySync") {
-				flag.send(message);
-			} else if (message.key == "DriverSync") {
-				drivers.update(message.value);
-			} else if (message.key == "ServePenalty") {
-				if (message.value.key == status.iracingId) {
-					timepenalty.tp = message.value.value;
-				}
-			} else if (message.key == "FCYMeters") {
-				if (message.value.userID == status.iracingId) {
-					flag.send(message);
-				}
-			} */
 		}
 	}
 

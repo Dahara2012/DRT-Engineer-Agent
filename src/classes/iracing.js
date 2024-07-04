@@ -55,11 +55,12 @@ export default class Iracing {
 		this._iracing.on('SessionInfo', (sessionInfo) => {
 			this.teamId = sessionInfo.data.DriverInfo.Drivers[sessionInfo.data.DriverInfo.DriverCarIdx].TeamID;
 			this.driverId = sessionInfo.data.DriverInfo.Drivers[sessionInfo.data.DriverInfo.DriverCarIdx].UserID;
+			connection.sendMessage({key: "SessionInfo", value: sessionInfo});
 		});
 
 
 		this._iracing.on('Telemetry', (telemetry) => {
-
+			connection.sendMessage({key: "Telemetry", value: telemetry});
 		})
 	}
 
