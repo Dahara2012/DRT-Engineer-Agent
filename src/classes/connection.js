@@ -32,8 +32,14 @@ export default class Connection {
 	}
 
 	sendMessage({key = 'key', value = 'value'} = {}) {
-		const message = {key: key, value: value, driverid: iracing.driverId, teamId: iracing.teamId};
-		this.ws.send(this._stringifyJSON(message));
+		if (this.connected === true){
+			const message = {key: key, value: value, driverid: iracing.driverId, teamId: iracing.teamId};
+			this.ws.send(this._stringifyJSON(message));
+			//console.log(`send ${key}`);
+		}else{
+			console.log(`tried to send ${key}, but Websocket not connected`);
+		}
+		
 	}
 
 	connect() {

@@ -5,6 +5,9 @@ export default class Iracing {
 		this._teamId = 0;
 		this._driverId = 0;
 		this._connect();
+
+		this._sessionCooldown = Date.now();
+		this._telemetryCooldown = Date.now();
 	}
 
 	get driverId() {
@@ -13,6 +16,22 @@ export default class Iracing {
 
 	get teamId() {
 		return this._teamId;
+	}
+
+	get sessionCooldown() {
+		return this._sessionCooldown;
+	}
+
+	get telemetryCooldown() {
+		return this._telemetryCooldown;
+	}
+
+	set sessionCooldown(time) {
+		this._sessionCooldown = time;
+	}
+
+	set telemetryCooldown(time) {
+		this._telemetryCooldown = time;
 	}
 
 	set driverId(number) {
@@ -33,8 +52,8 @@ export default class Iracing {
 
 		try {
 			irsdk.init({
-				telemetryUpdateInterval: 2000,
-				sessionInfoUpdateInterval: 10000
+				telemetryUpdateInterval: 1000,
+				sessionInfoUpdateInterval: 1000
 			})
 		} catch (error) {
 			console.error('Failed to initialize iRacing SDK:', error);
@@ -55,12 +74,20 @@ export default class Iracing {
 		this._iracing.on('SessionInfo', (sessionInfo) => {
 			this.teamId = sessionInfo.data.DriverInfo.Drivers[sessionInfo.data.DriverInfo.DriverCarIdx].TeamID;
 			this.driverId = sessionInfo.data.DriverInfo.Drivers[sessionInfo.data.DriverInfo.DriverCarIdx].UserID;
-			connection.sendMessage({key: "SessionInfo", value: sessionInfo});
+			const now = Date.now()
+			if (this.sessionCooldown < now - 2000){
+				connection.sendMessage({ key: "SessionInfo", value: sessionInfo });
+				this.sessionCooldown = now;
+			}
 		});
 
 
 		this._iracing.on('Telemetry', (telemetry) => {
-			connection.sendMessage({key: "Telemetry", value: telemetry});
+			const now = Date.now()
+			if (this.telemetryCooldown < now - 1000){
+				connection.sendMessage({ key: "Telemetry", value: telemetry });
+				this.telemetryCooldown = now;
+			}
 		})
 	}
 
