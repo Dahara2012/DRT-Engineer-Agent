@@ -5,9 +5,9 @@
   "main": "src/app.js",
   "type": "module",
   "scripts": {
-    "update-version": "node update-version.js",
+    "version": "node update-version.js",
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "npm run update-version && node src/app.js"
+    "start": "node src/app.js"
   },
   "author": "Dahara",
   "license": "ISC",
