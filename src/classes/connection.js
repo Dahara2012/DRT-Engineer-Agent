@@ -40,9 +40,8 @@ export default class Connection {
         teamId: iracing.teamId,
       };
       this.ws.send(this._stringifyJSON(message));
-      //console.log(`send ${key}`);
     } else {
-      console.log(`tried to send ${key}, but Websocket not connected`);
+      console.log(`Tried to send message but websocket is not connected`);
     }
   }
 
