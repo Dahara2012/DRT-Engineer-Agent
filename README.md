@@ -6,7 +6,7 @@ DRT Race Engineer Tool
 
 Before installing check that you have git and node insatalled \
 https://git-scm.com/downloads \
-https://nodejs.org/en/download/prebuilt-installer
+https://nodejs.org/en/download/prebuilt-installer (v20.16.0LTS)
 
 ## Installing
 

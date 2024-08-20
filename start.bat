@@ -1,3 +1,3 @@
 git fetch
 git pull
-node app.js
+npm start
