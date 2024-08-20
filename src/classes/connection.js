@@ -79,8 +79,14 @@ export default class Connection {
       this.connected = true;
       const message = this._parseJSON(e.data.toString());
 
-      if (message.key == "Code") {
-        console.log(`Your Code is: ${message.value}`);
+      if (message.key == "agentInit") {
+        if (message.value === false) {
+          this._shouldReconnect = false;
+          this.ws.close();
+          console.log(`Agent is not authorized. Closing connection.`);
+        } else {
+          console.log(`Connection to server successful`);
+        }
       }
     };
   }
