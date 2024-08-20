@@ -12,7 +12,7 @@ https://nodejs.org/en/download/prebuilt-installer
 
 Open a Terminal\
 Go to the directory you want to install the agent in \
-type: git clone https://github.com/Dahara2012/DRT-Engineer-Agent.git
+type: `git clone https://github.com/Dahara2012/DRT-Engineer-Agent.git`
 
 ## Using the Tool
 
