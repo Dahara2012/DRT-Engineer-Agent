@@ -4,6 +4,7 @@ export default class Iracing {
   constructor() {
     this._teamId = 0;
     this._driverId = 0;
+    this._subsessionId = 0;
     this._irsdkConnect();
 
     this._sessionCooldown = Date.now();
@@ -26,6 +27,16 @@ export default class Iracing {
     return this._telemetryCooldown;
   }
 
+  get subsessionId() {
+    return this._subsessionId;
+  }
+
+  set subsessionId(arg) {
+    this._subsessionId = arg;
+    connection.connect();
+    console.log(`Your SubsessionID is: ${this._subsessionId}`);
+  }
+
   set sessionCooldown(time) {
     this._sessionCooldown = time;
   }
@@ -34,23 +45,12 @@ export default class Iracing {
     this._telemetryCooldown = time;
   }
 
-  set driverId(driverid) {
-    const number = Number(driverid);
-    if (!isNaN(number)) {
-      if (this._driverId !== number) {
-        this._driverId = number;
-        connection.connect();
-      }
-    }
+  set driverId(arg) {
+    this._driverId = arg;
   }
 
-  set teamId(teamid) {
-    const number = Number(teamid);
-    if (!isNaN(number)) {
-      if (this._teamId !== number) {
-        this._teamId = number;
-      }
-    }
+  set teamId(arg) {
+    this._teamId = arg;
   }
 
   _irsdkConnect() {
@@ -86,17 +86,27 @@ export default class Iracing {
         sessionInfo.data.DriverInfo.Drivers[
           sessionInfo.data.DriverInfo.DriverCarIdx
         ].UserID;
+      this.subsessionId = sessionInfo.data.WeekendInfo.SubSessionID;
+
       const now = Date.now();
+
       if (this.sessionCooldown < now - 2000) {
-        connection.sendMessage({ key: "SessionInfo", value: sessionInfo });
+        connection.sendMessage({
+          key: "SessionInfo",
+          value: sessionInfo,
+        });
         this.sessionCooldown = now;
       }
     });
 
     this._iracing.on("Telemetry", (telemetry) => {
       const now = Date.now();
+
       if (this.telemetryCooldown < now - 1000) {
-        connection.sendMessage({ key: "Telemetry", value: telemetry });
+        connection.sendMessage({
+          key: "Telemetry",
+          value: telemetry,
+        });
         this.telemetryCooldown = now;
       }
     });
