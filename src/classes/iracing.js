@@ -33,7 +33,7 @@ export default class Iracing {
 
   set subsessionId(arg) {
     if (this._subsessionId != arg) {
-      console.log(`Your SubsessionID is: ${this._subsessionId}`);
+      console.log(`${helper.getCurrentTimeString()}: Your SubsessionID is: ${this._subsessionId}`);
       this._subsessionId = arg;
     }
     connection.connect();
@@ -68,7 +68,7 @@ export default class Iracing {
     }
 
     this._iracing.on("Connected", function () {
-      console.log("Connected to iRacing.");
+      console.log(`${helper.getCurrentTimeString()}: Connected to iRacing.`);
     });
 
     this._iracing.on("error", function (error) {
@@ -76,7 +76,7 @@ export default class Iracing {
     });
 
     this._iracing.on("Disconnected", function () {
-      console.log("iRacing shut down.");
+      console.log(`${helper.getCurrentTimeString()}: iRacing shut down.`);
     });
 
     this._iracing.on("SessionInfo", (sessionInfo) => {

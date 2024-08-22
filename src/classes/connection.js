@@ -58,12 +58,12 @@ export default class Connection {
     this.ws.onopen = () => {
       this.connected = true;
       this.sendMessage({ key: "agentInit", value: "" });
-      console.log("WebSocket connected");
+      console.log(`${helper.getCurrentTimeString()}: WebSocket connected`);
     };
 
     this.ws.onclose = (e) => {
       this.connected = false;
-      console.log("WebSocket was closed. " + e);
+      console.log(`${helper.getCurrentTimeString()}: WebSocket was closed. ${e}`);
       if (this.shouldReconnect) {
         this._reconnect();
       }
@@ -71,7 +71,7 @@ export default class Connection {
 
     this.ws.onerror = (error) => {
       this.connected = false;
-      console.error("WebSocket encountered error: " + error.message);
+      console.error(`${helper.getCurrentTimeString()}: WebSocket encountered error: ${error.message}`);
       if (this.shouldReconnect) {
         this._reconnect();
       }
@@ -85,9 +85,9 @@ export default class Connection {
         if (message.value === false) {
           this._shouldReconnect = false;
           this.ws.close();
-          console.log(`Agent is not authorized. Closing connection.`);
+          console.log(`${helper.getCurrentTimeString()}: Agent is not authorized. Closing connection.`);
         } else {
-          console.log(`Connection to server successful`);
+          console.log(`${helper.getCurrentTimeString()}: Connection to server successful`);
         }
       }
     };
