@@ -36,7 +36,7 @@ export default class Connection {
       const message = {
         key: key,
         value: value,
-        driverid: iracing.driverId,
+        driverId: iracing.driverId,
         teamId: iracing.teamId,
         subsessionId: iracing.subsessionId,
       };

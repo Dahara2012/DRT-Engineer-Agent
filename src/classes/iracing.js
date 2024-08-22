@@ -32,9 +32,11 @@ export default class Iracing {
   }
 
   set subsessionId(arg) {
-    this._subsessionId = arg;
+    if (this._subsessionId != arg) {
+      console.log(`Your SubsessionID is: ${this._subsessionId}`);
+      this._subsessionId = arg;
+    }
     connection.connect();
-    console.log(`Your SubsessionID is: ${this._subsessionId}`);
   }
 
   set sessionCooldown(time) {
@@ -78,14 +80,8 @@ export default class Iracing {
     });
 
     this._iracing.on("SessionInfo", (sessionInfo) => {
-      this.teamId =
-        sessionInfo.data.DriverInfo.Drivers[
-          sessionInfo.data.DriverInfo.DriverCarIdx
-        ].TeamID;
-      this.driverId =
-        sessionInfo.data.DriverInfo.Drivers[
-          sessionInfo.data.DriverInfo.DriverCarIdx
-        ].UserID;
+      this.teamId = sessionInfo.data.DriverInfo.Drivers[sessionInfo.data.DriverInfo.DriverCarIdx].TeamID;
+      this.driverId = sessionInfo.data.DriverInfo.DriverUserID;
       this.subsessionId = sessionInfo.data.WeekendInfo.SubSessionID;
 
       const now = Date.now();
@@ -104,7 +100,7 @@ export default class Iracing {
 
       if (this.telemetryCooldown < now - 1000) {
         connection.sendMessage({
-          key: "telemetry",
+          key: "telemetryInfo",
           value: telemetry.values,
         });
         this.telemetryCooldown = now;
