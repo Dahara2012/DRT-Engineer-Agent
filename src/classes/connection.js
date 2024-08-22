@@ -1,4 +1,4 @@
-import { WebSocket, iracing } from "../app.js";
+import { WebSocket, iracing, helper } from "../app.js";
 import { settings } from "./settings.js";
 
 export default class Connection {
@@ -43,7 +43,7 @@ export default class Connection {
       };
       this.ws.send(this._stringifyJSON(message));
     } else {
-      console.log(`Tried to send message but websocket is not connected`);
+      console.log(`${helper.getCurrentTimeString()}: Tried to send message but websocket is not connected`);
     }
   }
 
