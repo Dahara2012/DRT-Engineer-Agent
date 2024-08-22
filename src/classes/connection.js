@@ -1,4 +1,5 @@
 import { WebSocket, iracing } from "../app.js";
+import { settings } from "./settings.js";
 
 export default class Connection {
   constructor() {
@@ -50,7 +51,7 @@ export default class Connection {
     if (this.connected) {
       return;
     }
-    this.ws = new WebSocket("wss://127.0.0.1:13001", {
+    this.ws = new WebSocket(settings.server_uri, {
       rejectUnauthorized: false, // Only for self-signed certificates in development
     });
 
