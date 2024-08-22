@@ -1,4 +1,4 @@
-import { irsdk, connection } from "../app.js";
+import { irsdk, connection, helper } from "../app.js";
 
 export default class Iracing {
   constructor() {
