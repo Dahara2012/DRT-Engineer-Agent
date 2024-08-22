@@ -38,6 +38,7 @@ export default class Connection {
         value: value,
         driverid: iracing.driverId,
         teamId: iracing.teamId,
+        subsessionId: iracing.subsessionId,
       };
       this.ws.send(this._stringifyJSON(message));
     } else {

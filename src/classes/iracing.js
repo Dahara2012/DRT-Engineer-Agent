@@ -92,8 +92,8 @@ export default class Iracing {
 
       if (this.sessionCooldown < now - 2000) {
         connection.sendMessage({
-          key: "SessionInfo",
-          value: sessionInfo,
+          key: "sessionInfo",
+          value: sessionInfo.data,
         });
         this.sessionCooldown = now;
       }
@@ -104,8 +104,8 @@ export default class Iracing {
 
       if (this.telemetryCooldown < now - 1000) {
         connection.sendMessage({
-          key: "Telemetry",
-          value: telemetry,
+          key: "telemetry",
+          value: telemetry.values,
         });
         this.telemetryCooldown = now;
       }
