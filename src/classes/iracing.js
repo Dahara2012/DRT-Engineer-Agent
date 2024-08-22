@@ -5,7 +5,7 @@ const require = createRequire(import.meta.url);
 // Require the node-irsdk-2023 package using the created require function
 const irsdk = require("node-irsdk-2023");
 
-import { connection, helper } from "../app.js";
+import { websocket, helper } from "../app.js";
 
 export default class Iracing {
   constructor() {
@@ -43,7 +43,7 @@ export default class Iracing {
       console.log(`${helper.getCurrentTimeString()}: Your SubsessionID is: ${this._subsessionId}`);
       this._subsessionId = arg;
     }
-    connection.connect();
+    websocket.connect();
   }
 
   set sessionCooldown(time) {
@@ -94,7 +94,7 @@ export default class Iracing {
       const now = Date.now();
 
       if (this.sessionCooldown < now - 2000) {
-        connection.sendMessage({
+        websocket.sendMessage({
           key: "sessionInfo",
           value: sessionInfo.data,
         });
@@ -106,7 +106,7 @@ export default class Iracing {
       const now = Date.now();
 
       if (this.telemetryCooldown < now - 1000) {
-        connection.sendMessage({
+        websocket.sendMessage({
           key: "telemetryInfo",
           value: telemetry.values,
         });

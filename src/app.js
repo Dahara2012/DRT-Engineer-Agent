@@ -1,9 +1,9 @@
-// Import the Iracing and Connection classes from their respective files
+// Import the Iracing and Websocket classes from their respective files
 import Helper from "./classes/helper.js";
 import Iracing from "./classes/iracing.js";
-import Connection from "./classes/connection.js";
+import Websocket from "./classes/websocket.js";
 
-// Create instances of Iracing and Connection classes
+// Create instances of Iracing and Websocket classes
 export const helper = new Helper();
 export const iracing = new Iracing();
-export const connection = new Connection();
+export const websocket = new Websocket();

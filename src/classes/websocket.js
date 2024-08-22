@@ -2,7 +2,7 @@ import WebSocket from "ws";
 import { iracing, helper } from "../app.js";
 import { settings } from "./settings.js";
 
-export default class Connection {
+export default class Websocket {
   constructor() {
     this._connected = false;
     this._isReconnecting = false;
