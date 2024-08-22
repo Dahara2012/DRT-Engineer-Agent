@@ -1,4 +1,11 @@
-import { irsdk, connection, helper } from "../app.js";
+// Import the createRequire function to enable the use of CommonJS modules in an ES module environment
+import { createRequire } from "module";
+// Create a require function using the current module's URL
+const require = createRequire(import.meta.url);
+// Require the node-irsdk-2023 package using the created require function
+const irsdk = require("node-irsdk-2023");
+
+import { connection, helper } from "../app.js";
 
 export default class Iracing {
   constructor() {
