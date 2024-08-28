@@ -11,7 +11,7 @@ export default class Iracing {
   constructor() {
     this._teamId = 0;
     this._driverId = 0;
-    this._subsessionId = 0;
+    this._subsessionId = null;
     this._irsdkConnect();
 
     this._sessionCooldown = Date.now();
@@ -40,8 +40,8 @@ export default class Iracing {
 
   set subsessionId(arg) {
     if (this._subsessionId != arg) {
-      console.log(`${helper.getCurrentTimeString()}: Your SubsessionID is: ${this._subsessionId}`);
       this._subsessionId = arg;
+      console.log(`${helper.getCurrentTimeString()}: Your SubsessionID is: ${this._subsessionId}`);
     }
     websocket.connect();
   }
