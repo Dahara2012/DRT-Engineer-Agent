@@ -87,9 +87,9 @@ export default class Iracing {
     });
 
     this._iracing.on("SessionInfo", (sessionInfo) => {
-      this.teamId = sessionInfo.data.DriverInfo.Drivers[sessionInfo.data.DriverInfo.DriverCarIdx].TeamID;
-      this.driverId = sessionInfo.data.DriverInfo.DriverUserID;
-      this.subsessionId = sessionInfo.data.WeekendInfo.SubSessionID;
+      this.teamId = sessionInfo?.data?.DriverInfo?.Drivers?.[sessionInfo?.data?.DriverInfo?.DriverCarIdx]?.TeamID ?? null;
+      this.driverId = sessionInfo?.data?.DriverInfo?.DriverUserID ?? null;
+      this.subsessionId = sessionInfo?.data?.WeekendInfo?.SubSessionID ?? null;
 
       const now = Date.now();
 
