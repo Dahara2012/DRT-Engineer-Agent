@@ -7,7 +7,7 @@
   "scripts": {
     "version": "node update-version.js",
     "test": "jest",
-    "start": "node src/app.js"
+    "start": "npm run version && node src/app.js"
   },
   "author": "Dahara",
   "license": "ISC",
