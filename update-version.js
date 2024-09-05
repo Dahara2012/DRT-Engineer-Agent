@@ -1,6 +1,8 @@
 import { readFileSync, writeFileSync } from "fs";
 import { dirname, join } from "path";
 import { fileURLToPath } from "url";
+import Helper from "./src/classes/helper.js";
+const helper = new Helper();
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
